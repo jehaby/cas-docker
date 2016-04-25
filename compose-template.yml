@@ -14,7 +14,7 @@ services:
       - ${PROJECT}_data_volume:rw
     container_name: ${PROJECT}_php
     environment:
-      XDEBUG_CONFIG: "remote_host=192.168.60.117 idekey=PHPSTORM"
+      XDEBUG_CONFIG: "remote_host=${HOST_IP} idekey=PHPSTORM"
   ${PROJECT}_cas-web:
     image: nginx:1.8.1
     ports:
