@@ -4,14 +4,29 @@ RUN apt-get update \
     && apt-get -y install \
             libssl-dev \ 
             libxml2-dev \
-            --no-install-recommends \
-    && docker-php-ext-install \
-            xml \
-            dom \
-    && pecl install mongo \   
-    && docker-php-ext-enable mongo.so \
-    && rm -r /var/lib/apt/lists/* 
+            flex \
+            libbison-dev \
+            bison \
+            re2c \
+            php5-dev \
+            git \
+            --no-install-recommends
 
+RUN docker-php-ext-install \
+            xml \
+            dom 
+
+RUN pecl install mongo \   
+    && cd /tmp && curl -sL https://github.com/facebookarchive/xhp-php5-extension/archive/master.tar.gz | tar xz \
+      && cd xhp-php5-extension-master/ \
+      && phpize \
+      && ./configure \
+      && make \
+      && make install \
+    && docker-php-ext-enable \ 
+            mongo.so \
+            xhp.so \
+    && rm -r /var/lib/apt/lists/* 
 
 ENV PHPREDIS_VERSION=2.2.7
 RUN cd /usr/src/php/ext \

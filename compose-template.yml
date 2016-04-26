@@ -10,6 +10,7 @@ services:
     user: www-data
   ${PROJECT}_php:
     build: ./php
+    image: ${PROJECT}_php
     volumes_from:
       - ${PROJECT}_data_volume:rw
     container_name: ${PROJECT}_php
