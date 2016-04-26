@@ -1,7 +1,12 @@
 FROM php:5.6-fpm
 
+COPY php.ini /usr/local/etc/php/
+
 RUN apt-get update \
     && apt-get -y install \
+            libpcre3-dev \
+            gcc \
+            make \
             libssl-dev \ 
             libxml2-dev \
             flex \
@@ -27,6 +32,12 @@ RUN pecl install mongo \
             mongo.so \
             xhp.so \
     && rm -r /var/lib/apt/lists/* 
+
+RUN cd /tmp \
+    && git clone --depth=1 git://github.com/phalcon/cphalcon.git \
+    && cd cphalcon/build \
+    && ./install \
+    && docker-php-ext-enable phalcon.so
 
 ENV PHPREDIS_VERSION=2.2.7
 RUN cd /usr/src/php/ext \
