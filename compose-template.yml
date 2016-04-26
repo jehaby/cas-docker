@@ -14,6 +14,9 @@ services:
     volumes_from:
       - ${PROJECT}_data_volume:rw
     container_name: ${PROJECT}_php
+    links:
+      - ${PROJECT}_redis
+      - ${PROJECT}_mongo
     environment:
       XDEBUG_CONFIG: "remote_host=${HOST_IP} idekey=PHPSTORM"
   ${PROJECT}_cas-web:
@@ -36,5 +39,9 @@ services:
       - ./configs/my.conf:/etc/nginx/conf.d/default.conf
     links:
       - ${PROJECT}_php
-
+  ${PROJECT}_redis:
+    image: redis:2
+  ${PROJECT}_mongo:
+    image: mongo:2
+    
 
