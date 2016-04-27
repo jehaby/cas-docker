@@ -11,7 +11,7 @@ server {
 
         location ~ /cas/index.php {
                 root /var/www/lib/cas-server;
-                fastcgi_pass ${PROJECT}_php:9000;
+                fastcgi_pass ${PROJECT}php:9000;
                 fastcgi_index /index.php;
                 include /etc/nginx/fastcgi_params;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;

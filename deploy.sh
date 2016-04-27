@@ -33,4 +33,4 @@ envsubst '$MY_DOMAINS:$PROJECT' < configs/my.conf.tpl > configs/my.conf
 # Let's populate the variables in our compose file template,
 # then deploy it!
 cat compose-template.yml | envsubst > docker-compose.yml
-docker-compose up -d $COMPOSE_ARGUMENTS
+docker-compose -p $PROJECT up -d $COMPOSE_ARGUMENTS
