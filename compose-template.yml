@@ -1,5 +1,8 @@
 version: "2"
 
+volumes:
+  mongo_storage: ~
+
 services:
   data_volume:
     image: 'debian'
@@ -43,6 +46,10 @@ services:
     image: redis:2
   mongo:
     image: mongo:2
-
-    
-
+    ports:
+      - "27017:27017"
+    container_name: ${PROJECT}mongo
+    volumes:
+#      - ./mongo/mongodump.tgz:/tmp/mongodump.tgz
+      - mongo_storage:/data
+  

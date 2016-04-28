@@ -23,7 +23,7 @@ HOST_IP=$(get_my_ip $INTERFACE)
 
 # Let's delete all containers that have a `my-project_` prefix:
 # (by deleting/re-deploying our containers, this script is now idempotent!):
-docker rm -f $(docker ps -aq -f name=${PROJECT}_*)
+docker rm -f $(docker ps -aq -f name=${PROJECT}*)
 
 # Now lets populate our nginx config templates to get an actual nginx config
 # (which will be loaded into our nginx container):
@@ -33,4 +33,5 @@ envsubst '$MY_DOMAINS:$PROJECT' < configs/my.conf.tpl > configs/my.conf
 # Let's populate the variables in our compose file template,
 # then deploy it!
 cat compose-template.yml | envsubst > docker-compose.yml
-docker-compose -p $PROJECT up -d $COMPOSE_ARGUMENTS
+docker-compose -p $PROJECT up -d $COMPOSE_ARGUMENTS 
+
