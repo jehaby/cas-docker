@@ -22,6 +22,7 @@ services:
       - mongo
     environment:
       XDEBUG_CONFIG: "remote_host=${HOST_IP} idekey=PHPSTORM"
+      PHP_IDE_CONFIG: "serverName=${PHPSTORM_SERVER}"
   cas-web:
     image: nginx:1.8.1
     ports:
