@@ -51,4 +51,3 @@ RUN yes | pecl install xdebug \
 
 USER www-data
 WORKDIR /var/www
-CMD bash

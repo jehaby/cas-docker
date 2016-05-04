@@ -50,7 +50,8 @@ services:
     ports:
       - "27017:27017"
     container_name: ${PROJECT}mongo
-    volumes:
-#      - ./mongo/mongodump.tgz:/tmp/mongodump.tgz
-      - mongo_storage:/data
+  mongo-seed:
+    build: ./mongo-seed
+    links:
+      - mongo
   
