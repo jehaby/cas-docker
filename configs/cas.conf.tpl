@@ -10,10 +10,10 @@ server {
         }
 
         location /api {
-                rewrite ^(.*) /index.php?_url=$1;
+                rewrite ^(.*) /cas/index.php?_url=$1;
         }
 
-        location ~ "/(cas/)?index.php" {
+        location ~ /cas/index.php {
                 root /var/www/lib/cas-server;
                 fastcgi_pass ${PROJECT}php:9000;
                 fastcgi_index /index.php;
