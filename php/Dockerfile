@@ -15,6 +15,7 @@ RUN apt-get update \
             re2c \
             php5-dev \
             git \
+            openssh-client \
             --no-install-recommends
 
 RUN docker-php-ext-install \
@@ -30,8 +31,8 @@ RUN pecl install mongo \
       && make install \
     && docker-php-ext-enable \ 
             mongo.so \
-            xhp.so \
-    && rm -r /var/lib/apt/lists/* 
+            xhp.so 
+
 
 RUN cd /tmp \
     && git clone --depth=1 git://github.com/phalcon/cphalcon.git \
