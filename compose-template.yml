@@ -23,6 +23,15 @@ services:
     environment:
       XDEBUG_CONFIG: "remote_host=${HOST_IP} idekey=PHPSTORM"
       PHP_IDE_CONFIG: "serverName=${PHPSTORM_SERVER}"
+  php-nx:
+    build: ./php-no-xdebug
+    image: ${PROJECT}php-no-xdebug
+    volumes_from:
+      - data_volume:rw
+    container_name: ${PROJECT}php-no-xdebug
+    links:
+      - redis
+      - mongo
   cas-web:
     image: nginx:1.8.1
     ports:
